@@ -1,0 +1,75 @@
+:root {
+    --b: #101010;
+    --c: #fff;
+    --a: dodgerblue;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html {
+    background-color: var(--b);
+    color: var(--c);
+    margin: 10px;
+}
+
+body {
+    margin: auto;
+    max-width: 500px;
+}
+
+button,
+input,
+select {
+    background-color: var(--b);
+    color: var(--c);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--a);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: var(--c);
+    text-decoration: none;
+}
+
+a.active {
+    color: var(--a);
+}
+
+::placeholder {
+    color: var(--c);
+}
+
+button:hover,
+input:focus,
+select:hover {
+    background-color: var(--a);
+    color: var(--c);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    box-shadow: 0 0 10px -2px var(--a);
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.view {
+    padding: 10px;
+    margin-top: 10px;
+}
