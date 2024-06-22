@@ -30,13 +30,15 @@ function Admin() {
         <p>
             password: <input readOnly type="text" placeholder="password..." value={password} />
         </p>
+        <br />
         <p>
-            <NavLink to="/admin/absent">
+            <NavLink className="btn" to="/admin/absent">
                 Heute nicht da
             </NavLink>
         </p>
+        <br />
         <p>
-            <NavLink to="/admin/classes">
+            <NavLink className="btn" to="/admin/classes">
                 Klassen
             </NavLink>
         </p>

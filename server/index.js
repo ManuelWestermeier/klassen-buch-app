@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import crypto from 'crypto';
+import crypto, { randomBytes } from 'crypto';
 import { log } from "console";
 import { writeFileSync } from "fs";
 
@@ -198,6 +198,17 @@ app.get("/admin/absent/complete", isAdmin, (req, res) => {
 
     res.json(absentList);
 });
+
+app.get("/admin/classes/add", isAdmin, (req, res) => {
+    const password = randomBytes(8).toString("hex")
+    
+    classes[req.query.className] = {
+        password,
+        students: [],
+    }
+
+    res.json(password)
+})
 
 // Start the server
 app.listen(8080);

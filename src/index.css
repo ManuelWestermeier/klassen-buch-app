@@ -23,7 +23,8 @@ body {
 
 button,
 input,
-select {
+select,
+.btn {
     background-color: var(--b);
     color: var(--c);
     padding: 5px;
@@ -32,6 +33,11 @@ select {
     border: 2px solid var(--a);
     outline: none;
     transition: all 0.3s ease-in-out;
+}
+
+.btn.active {
+    background-color: var(--a);
+    color: var(--c);
 }
 
 button {

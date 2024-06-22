@@ -19,6 +19,7 @@ function App() {
                     <Navigate to="/login" />} />
                 <Route path='/login' element={<Login setAuth={setAuth} />} />
                 <Route path='/admin/' element={<Admin />} >
+                    <Route index element={<Navigate to="/admin/absent" />} />
                     <Route path='classes' index element={<AdminClasses />} />
                     <Route path='absent' element={<AdminAbsent />} />
                 </Route>
