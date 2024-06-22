@@ -92,3 +92,7 @@ main {
     display: flex;
     align-items: center;
 }
+
+fieldset {
+    border: none;
+}

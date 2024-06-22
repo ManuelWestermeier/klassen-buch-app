@@ -6,6 +6,7 @@ import Login from './pages/login'
 import Admin from './pages/admin'
 import AdminClasses from './pages/admin/classes'
 import AdminAbsent from './pages/admin/absent'
+import AdminClass from './pages/admin/classes/class'
 
 function App() {
     const [auth, setAuth] = useAuth()
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/login' element={<Login setAuth={setAuth} />} />
                 <Route path='/admin/' element={<Admin />} >
                     <Route index element={<Navigate to="/admin/absent" />} />
+                    <Route path='classes/:id' element={<AdminClass />} />
                     <Route path='classes' index element={<AdminClasses />} />
                     <Route path='absent' element={<AdminAbsent />} />
                 </Route>

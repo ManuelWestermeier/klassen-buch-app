@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import crypto, { randomBytes } from 'crypto';
 import { readFileSync, writeFileSync } from "fs";
+import { log } from "console";
 
 const app = express();
 
@@ -206,6 +207,7 @@ app.get("/admin/absent/complete", isAdmin, (req, res) => {
     res.json(absentList);
 });
 
+// add a class
 app.get("/admin/classes/add", isAdmin, (req, res) => {
     const password = randomBytes(8).toString("hex")
 
@@ -215,6 +217,26 @@ app.get("/admin/classes/add", isAdmin, (req, res) => {
     }
 
     res.json(password)
+})
+
+//delate a class
+app.get("/admin/classes/delete", isAdmin, (req, res) => {
+    if (!req.query.className)
+        return res.json(false)
+
+    if (classes[req.query.className])
+        delete classes[req.query.className]
+
+    res.json(true)
+})
+
+// add a class
+app.get("/admin/classes/students/add", isAdmin, (req, res) => {
+    if (classes[req.query.className])
+        classes[req.query.className].students
+            .push([req.query.studentName, [], []])
+
+    res.json(true)
 })
 
 // Start the server
