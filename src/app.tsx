@@ -8,7 +8,7 @@ function App() {
     const [auth, setAuth] = useAuth()
 
     return <>
-        <Navbar {...auth} />
+        <Navbar />
         <main>
             <Routes>
                 <Route path='/' element={auth.isAuth ?

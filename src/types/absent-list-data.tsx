@@ -1,0 +1,1 @@
+export type AbsentListData = [[string, string[]]]
