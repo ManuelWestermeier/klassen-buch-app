@@ -17,7 +17,7 @@ export default function AdminAbsent() {
   }, [])
 
   if (state != 1) {
-    return <p>Loading...</p>
+    return <p>Läd...</p>
   }
 
   return absentList?.map(([studentName, _class, absentListFromStudent]) =>
