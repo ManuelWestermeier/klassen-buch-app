@@ -17,6 +17,7 @@ export default function AdminClasses() {
     <h3>
       Klassen
     </h3>
+    {!classes?.length && <p>noch keine Klassen</p>}
     {classes?.map(className => {
       return <p key={className} className='flex' style={{ justifyContent: "space-between" }}>
         <Link to={`/admin/classes/${className}`} className='btn'>

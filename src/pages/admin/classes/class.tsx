@@ -21,6 +21,7 @@ function AdminClass() {
             <h3>
                 Klasse {id}
             </h3>
+            {!students?.length && <p>noch keine Schüler</p>}
             {students?.map(studentName => {
                 return <p key={studentName} className='flex' style={{ justifyContent: "space-between" }}>
                     <span>

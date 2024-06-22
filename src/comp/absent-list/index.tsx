@@ -22,6 +22,12 @@ function AbsentList({ className, password, setSetAbsent, auth }: {
         return <p>Läd...</p>
     }
 
+    if (!absent?.length) {
+        return <p>
+            Alle da
+        </p>
+    }
+
     return (
         <>
             {absent?.map(([studentName, absentList, isCompleted], index) => <AbsentStudent

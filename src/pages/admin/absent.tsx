@@ -20,6 +20,12 @@ export default function AdminAbsent() {
     return <p>Läd...</p>
   }
 
+  if (!absentList?.length) {
+    return <p>
+      alle anwesend
+    </p>
+  }
+
   return absentList?.map(([studentName, _class, absentListFromStudent]) =>
     <div key={studentName}>
       <p className="flex">
