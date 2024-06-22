@@ -87,7 +87,7 @@ app.get("/classes/", (req, res) => res.json(Object.keys(classes)));
 app.get("/auth-class/", (req, res) => {
     const { class: className, password } = req.query;
     const isAuth = classes[className]?.password === password;
-    if (!isAuth) {
+    if (!isAuth || !classes[className]) {
         return res.json(false);
     }
     res.json(true);
