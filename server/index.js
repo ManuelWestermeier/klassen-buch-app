@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import crypto, { randomBytes } from 'crypto';
 import { readFileSync, writeFileSync } from "fs";
-import { log } from "console";
 
 const app = express();
 
@@ -50,7 +49,7 @@ const isClient = (req, res, next) => {
 };
 
 // Mock classes data
-const classes = {
+const classes = /*{
     "10a": {
         password: "dhajw2",
         students: [
@@ -78,7 +77,7 @@ const classes = {
         password: "qwmne2",
         students: [],
     }
-};
+};*/ JSON.parse(readFileSync("data.json", "utf-8"))
 
 // Route to get all classes
 app.get("/classes/", (req, res) => res.json(Object.keys(classes)));
@@ -119,7 +118,7 @@ app.get("/class/students/absent/", isClient, (req, res) => {
 });
 
 setInterval(() => {
-    writeFileSync("data.json", JSON.stringify(classes, null, 2), "utf-8");
+    writeFileSync("data.json", JSON.stringify(classes), "utf-8");
 }, 10000);
 
 // Add absent student

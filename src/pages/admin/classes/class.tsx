@@ -1,4 +1,4 @@
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import getUrl from "../../../utils/get-url";
 import useFetch from "../../../hooks/use-fetch";
 
