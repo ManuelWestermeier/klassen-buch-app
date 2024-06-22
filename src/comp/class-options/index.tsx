@@ -6,7 +6,7 @@ function ClassOptions() {
 
     if (state != 1) {
         return <option value="5a">
-            Loading...
+            Läd...
         </option>
     }
 

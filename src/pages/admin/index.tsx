@@ -1,5 +1,6 @@
 import { useState } from "react"
 import useAdminAuth from "../../hooks/use-admin-auth"
+import { NavLink, Outlet } from "react-router-dom"
 
 function Admin() {
     const [{ isAuth, password }, authenticate] = useAdminAuth()
@@ -22,7 +23,27 @@ function Admin() {
         </form>
     }
 
-    return <div>Admin {password}</div>
+    return <div>
+        <h2>
+            Admin
+        </h2>
+        <p>
+            password: <input readOnly type="text" placeholder="password..." value={password} />
+        </p>
+        <p>
+            <NavLink to="/admin/absent">
+                Heute nicht da
+            </NavLink>
+        </p>
+        <p>
+            <NavLink to="/admin/classes">
+                Klassen
+            </NavLink>
+        </p>
+        <div className="view">
+            <Outlet context={password} />
+        </div>
+    </div>
 }
 
 export default Admin

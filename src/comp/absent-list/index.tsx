@@ -19,18 +19,19 @@ function AbsentList({ className, password, setSetAbsent, auth }: {
     useEffect(() => setSetAbsent(setAbsentList), [setAbsentList])
 
     if (state !== 1) {
-        return <p>Loading...</p>
+        return <p>Läd...</p>
     }
 
     return (
         <>
-            {absent?.map(([studentName, absentList], index) => <AbsentStudent
+            {absent?.map(([studentName, absentList, isCompleted], index) => <AbsentStudent
                 studentName={studentName}
                 absentList={absentList}
                 index={index}
                 setAbsent={setAbsentList}
                 key={studentName}
                 auth={auth}
+                isCompleted={isCompleted}
             />)}
         </>
     )

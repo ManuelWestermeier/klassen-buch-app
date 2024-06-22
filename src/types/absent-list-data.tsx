@@ -1,1 +1,1 @@
-export type AbsentListData = [[string, string[]]]
+export type AbsentListData = [[string, string[], boolean]]

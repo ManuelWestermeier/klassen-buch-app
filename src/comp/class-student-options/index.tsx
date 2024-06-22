@@ -12,11 +12,11 @@ function ClassStudentOptions({ className, password }: {
 
     if (state != 1) {
         return <option value="5a">
-            Loading...
+            Läd...
         </option>
     }
 
-    return options?.map(([studentName]) => {
+    return options?.map((studentName) => {
         return <option value={studentName} key={studentName}>
             {studentName}
         </option>
