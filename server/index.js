@@ -131,9 +131,9 @@ app.get("/class/students/absent/toggle-absent/", isClient, (req, res) => {
     classData.students = classData.students.map(([name, absentDates]) => {
         if (name === studentName) {
             const isAbsentToday = absentDates.includes(today);
-            if (isAbsentToday) {
+            if (isAbsentToday && req.query.feature == "delete") {
                 absentDates = absentDates.filter(date => date !== today);
-            } else {
+            } else if (!isAbsentToday && req.query.feature == "add") {
                 absentDates = [today, ...absentDates];
             }
         }
@@ -145,6 +145,14 @@ app.get("/class/students/absent/toggle-absent/", isClient, (req, res) => {
     const absentStudents = classData.students.filter(([_, absentDates]) => absentDates.includes(today));
 
     res.json(absentStudents);
+})
+
+// Admin Routes
+
+app.get("/admin/login/", (req, res) => {
+    const hashedPassword = hashPassword(req.query.password);
+
+    res.json(hashedPassword === adminPasswordHash) 
 })
 
 // Admin route to get all absent students

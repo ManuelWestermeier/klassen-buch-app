@@ -10,6 +10,9 @@ function Navbar() {
             <NavLink to="/login">
                 Login
             </NavLink>
+            <NavLink to="/admin">
+                Admin
+            </NavLink>
         </nav>
     )
 }

@@ -35,7 +35,8 @@ export function AbsentStudent({ studentName, index, absentList, setAbsent, auth 
                     const res = await fetch(getUrl("/class/students/absent/toggle-absent/", {
                         "student-absent": studentName,
                         class: auth.className,
-                        password: auth.password
+                        password: auth.password,
+                        feature: "delete"
                     }))
 
                     const newAbsentData: AbsentListData = await res.json()

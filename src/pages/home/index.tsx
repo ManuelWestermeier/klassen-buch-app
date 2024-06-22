@@ -41,7 +41,8 @@ function Home({ auth }: { auth: Auth }) {
             const res = await fetch(getUrl("/class/students/absent/toggle-absent/", {
               "student-absent": fd.get("student-absent") as string,
               class: auth.className,
-              password: auth.password
+              password: auth.password,
+              feature: "add"
             }))
 
             const newAbsentData: AbsentListData = await res.json()
