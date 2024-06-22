@@ -96,6 +96,11 @@ app.get("/auth-class/", (req, res) => {
 // Route to get students of a class
 app.get("/class/students/", isClient, (req, res) => {
     const { class: className } = req.query;
+
+    if (!classes[className]) {
+        return res.json([])
+    }
+
     res.json(classes[className].students.map(([name]) => name));
 });
 
@@ -234,7 +239,17 @@ app.get("/admin/classes/delete", isAdmin, (req, res) => {
 app.get("/admin/classes/students/add", isAdmin, (req, res) => {
     if (classes[req.query.className])
         classes[req.query.className].students
-            .push([req.query.studentName, [], []])
+            .push([req.query.studentName + "", [], []])
+
+    res.json(true)
+})
+
+// add a class
+app.get("/admin/classes/students/delete", isAdmin, (req, res) => {
+    if (classes[req.query.className])
+        classes[req.query.className].students =
+            classes[req.query.className].students
+                .filter(([name]) => req.query.studentName != name)
 
     res.json(true)
 })

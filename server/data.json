@@ -1,10 +1,40 @@
 {
   "10a": {
-    "password": "1ef17994026080e4",
-    "students": []
+    "password": "dhajw2",
+    "students": [
+      [
+        "hans xy",
+        [
+          "23.6.2024"
+        ],
+        []
+      ],
+      [
+        "Henrik Killman",
+        [
+          "23.6.2024"
+        ],
+        []
+      ],
+      [
+        "XYZ",
+        [
+          "23.6.2024"
+        ],
+        []
+      ]
+    ]
   },
   "10b": {
-    "password": "7e293b822a2e34bb",
+    "password": "sjh22q",
+    "students": []
+  },
+  "11a": {
+    "password": "kssns2",
+    "students": []
+  },
+  "11b": {
+    "password": "287shh",
     "students": []
   }
 }
