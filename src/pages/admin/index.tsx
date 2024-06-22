@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import useAdminAuth from "../../hooks/use-admin-auth"
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
+import getUrl from "../../utils/get-url"
 
 function Admin() {
     const [{ isAuth, password }, authenticate] = useAdminAuth()
     const [error, setError] = useState("")
+    const newPasswordInput = useRef<HTMLInputElement>(null)
+    const navigate = useNavigate();
 
     if (!isAuth) {
         return <form onSubmit={async e => {
@@ -23,12 +26,33 @@ function Admin() {
         </form>
     }
 
+    const handlePasswordChange = async () => {
+        const newPasswordValue = newPasswordInput.current?.value + "";
+        if (password !== newPasswordValue) {
+            try {
+                await fetch(getUrl("/admin/set-password/", { password, newPassword: newPasswordValue }));
+            } catch (error) { }
+            authenticate(newPasswordValue);
+            navigate("/admin/")
+        }
+    };
+
     return <div>
         <h2>
             Admin
         </h2>
         <p>
-            password: <input readOnly type="text" placeholder="password..." value={password} />
+            password: <input
+                defaultValue={password}
+                type="text"
+                placeholder="password..."
+                ref={newPasswordInput}
+            />
+            {password != (newPasswordInput.current?.value + "") && (
+                <button onClick={handlePasswordChange} type="submit">
+                    Passwort ändern
+                </button>
+            )}
         </p>
         <br />
         <p>

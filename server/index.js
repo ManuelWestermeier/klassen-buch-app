@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
 import crypto, { randomBytes } from 'crypto';
-import { log } from "console";
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
 const app = express();
 
@@ -17,7 +16,7 @@ app.use(cors({
 
 // Predefined admin password hash
 // Password: admin1234
-const adminPasswordHash = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270";
+var adminPasswordHash = readFileSync("password.txt", "utf-8");
 
 // Function to hash a password
 const hashPassword = (password) => {
@@ -151,6 +150,14 @@ app.get("/admin/login/", (req, res) => {
     res.json(hashedPassword === adminPasswordHash);
 });
 
+// Admin Routes
+app.get("/admin/set-password/", isAdmin, (req, res) => {
+    if (req.query.newPassword)
+        adminPasswordHash = hashPassword(req.query.newPassword);
+    writeFileSync("password.txt", adminPasswordHash, "utf-8")
+    res.json(true)
+});
+
 // Admin route to get all absent students
 app.get("/admin/absent/", isAdmin, (req, res) => {
     const today = new Date().toLocaleDateString();
@@ -201,7 +208,7 @@ app.get("/admin/absent/complete", isAdmin, (req, res) => {
 
 app.get("/admin/classes/add", isAdmin, (req, res) => {
     const password = randomBytes(8).toString("hex")
-    
+
     classes[req.query.className] = {
         password,
         students: [],
