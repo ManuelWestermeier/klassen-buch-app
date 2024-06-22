@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import crypto from 'crypto';
+import { log } from "console";
 
 const app = express();
 
@@ -19,7 +20,7 @@ const adminPasswordHash = "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc059
 
 // Function to hash a password
 const hashPassword = (password) => {
-    return crypto.createHash('sha256').update(password).digest('hex');
+    return crypto.createHash('sha256').update(password + "").digest('hex');
 };
 
 // Middleware to check if the user is an admin
@@ -55,7 +56,7 @@ const isClient = (req, res, next) => {
 const classes = {
     "10a": {
         password: "dhajw2",
-        students: [["hans xy", [new Date().toDateString()]], ["Henrik Killman", []]],
+        students: [["hans xy", [new Date().toLocaleDateString()]], ["Henrik Killman", []]],
     },
     "10b": {
         password: "sjh22q",
@@ -104,7 +105,7 @@ app.get("/class/students/", isClient, (req, res) => {
 
 // Route to get absent students of a class
 app.get("/class/students/absent/", isClient, (req, res) => {
-    const today = new Date().toDateString();
+    const today = new Date().toLocaleDateString();
 
     const absentStudents = classes[req.query.class].students.filter(([studentName, studentAbsentList]) =>
         studentAbsentList.includes(today)
@@ -116,31 +117,39 @@ app.get("/class/students/absent/", isClient, (req, res) => {
 // Add absent student
 
 app.get("/class/students/absent/toggle-absent/", isClient, (req, res) => {
-    const classData = classes[req.query.class]
-    const today = new Date().toDateString();
+    const className = req.query.class;
+    const studentName = req.query["student-absent"];
 
-    classData.students = classData.students.map(([studentName, studentAbsentList]) => {
-        if (studentName == req.query.student) {
-            if (studentAbsentList.includes(today)) {
-                studentAbsentList = studentAbsentList.filter(date => date !== today);
-            }
-            else {
-                studentAbsentList.push(today)
+    if (typeof className != "string" || typeof studentName != "string") {
+        return res.status(400).json({ error: "Invalid class or student name" });
+    }
+
+    const classData = classes[className];
+
+    const today = new Date().toLocaleDateString();
+
+    classData.students = classData.students.map(([name, absentDates]) => {
+        if (name === studentName) {
+            const isAbsentToday = absentDates.includes(today);
+            if (isAbsentToday) {
+                absentDates = absentDates.filter(date => date !== today);
+            } else {
+                absentDates = [today, ...absentDates];
             }
         }
-        return [studentName, studentAbsentList]
-    })
+        return [name, absentDates];
+    });
 
-    const absentStudents = classes[req.query.class].students.filter(([studentName, studentAbsentList]) =>
-        studentAbsentList.includes(today)
-    );
+    const absentStudents = classData.students.filter(([_, absentDates]) => absentDates.includes(today));
+
+    classes[className] = classData;
 
     res.json(absentStudents);
 })
 
 // Admin route to get all absent students
 app.get("/admin/absent/", isAdmin, (req, res) => {
-    const today = new Date().toDateString();
+    const today = new Date().toLocaleDateString();
     const absentList = [];
 
     Object.keys(classes).forEach(_class => {

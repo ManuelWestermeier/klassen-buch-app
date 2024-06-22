@@ -7,7 +7,6 @@ export default function useAuth(): [Auth, React.Dispatch<React.SetStateAction<Au
     const [auth, setAuth] = useLocalStorage<Auth>("klassen-buch-app-auth", { isAuth: false, className: "", password: "" })
 
     useEffect(() => {
-        console.log(auth)
         if (auth.isAuth) {
             (async () => {
                 try {

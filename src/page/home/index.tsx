@@ -18,7 +18,12 @@ function Home({ auth }: { auth: Auth }) {
           <p>
             Heute nicht da:
           </p>
-          <AbsentList setSetAbsent={setSetAbsent} className={auth.className} password={auth.password} />
+          <AbsentList
+            auth={auth}
+            setSetAbsent={setSetAbsent}
+            className={auth.className}
+            password={auth.password}
+          />
         </div>
         <form className="view" onSubmit={async e => {
           e.preventDefault()
@@ -27,7 +32,9 @@ function Home({ auth }: { auth: Auth }) {
 
           try {
             const res = await fetch(getUrl("/class/students/absent/toggle-absent/", {
-              "student-absent": fd.get("student-absent") as string
+              "student-absent": fd.get("student-absent") as string,
+              class: auth.className,
+              password: auth.password
             }))
 
             const newAbsentData: AbsentListData = await res.json()
