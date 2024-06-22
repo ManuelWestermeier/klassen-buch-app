@@ -11,18 +11,10 @@ function AbsentList({ className, password, setSetAbsent, auth }: {
     setSetAbsent: React.Dispatch<React.Dispatch<AbsentListData>>,
     auth: Auth
 }) {
-    const [absent, state, refresh, setAbsentList] = useFetch<AbsentListData>(getUrl("/class/students/absent/", {
+    const [absent, state, _, setAbsentList] = useFetch<AbsentListData>(getUrl("/class/students/absent/", {
         "class": className,
         password
     }))
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            refresh()
-        }, 10000)
-
-        return () => clearInterval(interval)
-    }, [refresh])
 
     useEffect(() => setSetAbsent(setAbsentList), [setAbsentList])
 

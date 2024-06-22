@@ -140,9 +140,9 @@ app.get("/class/students/absent/toggle-absent/", isClient, (req, res) => {
         return [name, absentDates];
     });
 
-    const absentStudents = classData.students.filter(([_, absentDates]) => absentDates.includes(today));
-
     classes[className] = classData;
+
+    const absentStudents = classData.students.filter(([_, absentDates]) => absentDates.includes(today));
 
     res.json(absentStudents);
 })

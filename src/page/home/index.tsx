@@ -7,6 +7,11 @@ import getUrl from "../../utils/get-url"
 
 function Home({ auth }: { auth: Auth }) {
   const [setAbsent, setSetAbsent] = useState<Dispatch<AbsentListData>>()
+  const [isLoading, setIsLoading] = useState(false)
+
+  if (isLoading) {
+    return <p>Läd....</p>
+  }
 
   return (
     <>
@@ -30,6 +35,8 @@ function Home({ auth }: { auth: Auth }) {
           const form = e.target as HTMLFormElement;
           const fd = new FormData(form)
 
+          setIsLoading(true)
+
           try {
             const res = await fetch(getUrl("/class/students/absent/toggle-absent/", {
               "student-absent": fd.get("student-absent") as string,
@@ -46,6 +53,8 @@ function Home({ auth }: { auth: Auth }) {
             }
 
           } catch (error) { alert(error) }
+
+          setIsLoading(false)
         }}>
           <select name="student-absent">
             <ClassStudentOptions
