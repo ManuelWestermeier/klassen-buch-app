@@ -1,0 +1,9 @@
+{
+    "name": "Klassenbuch-App",
+    "short_name": "kba",
+    "description": "erste Klassenbuch App",
+    "start_url": "/klassen-buch-app/#/",
+    "theme_color": "#101010",
+    "background_color": "#101010",
+    "display": "standalone"
+}
