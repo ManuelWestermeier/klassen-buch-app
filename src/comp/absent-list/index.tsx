@@ -24,7 +24,7 @@ function AbsentList({ className, password, setSetAbsent, auth }: {
 
     if (!absent?.length) {
         return <p>
-            Alle da
+            noch keiner abwesend gemeldet
         </p>
     }
 

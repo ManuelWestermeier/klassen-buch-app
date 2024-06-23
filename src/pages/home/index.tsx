@@ -15,9 +15,9 @@ function Home({ auth }: { auth: Auth }) {
 
   return (
     <>
-      <p>
+      <h2>
         Klasse {auth.className}
-      </p>
+      </h2>
       <div className="view">
         <div className="view">
           <p>

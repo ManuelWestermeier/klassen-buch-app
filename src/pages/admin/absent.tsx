@@ -22,7 +22,7 @@ export default function AdminAbsent() {
 
   if (!absentList?.length) {
     return <p>
-      alle anwesend
+      noch keiner abwesend gemeldet
     </p>
   }
 
