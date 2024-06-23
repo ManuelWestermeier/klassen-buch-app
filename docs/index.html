@@ -14,11 +14,14 @@
 </head>
 
 <body>
-  <p>
+  <p id="banner">
     Sie nutzen die Demo (Längere Wartezeiten sind möglich) <button
-      onclick="event.target.parentElement.style.display='none'">OK</button>
+      onclick="event.target.parentElement.style.display = 'none'; localStorage.setItem('bannerclicked', 'yes');">OK</button>
   </p>
   <div id="root"></div>
+  <script>
+    document.getElementById("banner").style.display = localStorage.getItem('bannerclicked') == 'yes' ? 'none' : '' 
+  </script>
 </body>
 
 </html>
